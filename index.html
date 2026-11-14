@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buen Provecho - Reseñas de restaurantes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700;800&family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script type="module" src="main.js"></script>
+  <!-- Configuración PWA para celulares -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icono.png">
+  <meta name="theme-color" content="#12261F">
+  <meta name="mobile-web-app-capable" content="yes">
+</head>
+<body>
+  <header class="site-header">
+    <h1>Buen Provecho</h1>
+    <p>Contá dónde comiste y descubrí adónde ir a comer.</p>
+  </header>
+  <main class="container">
+    <section class="auth-section">
+      <div id="sesion-activa" hidden>
+        <span>Sesión iniciada como <strong id="usuario-email"></strong></span>
+        <button type="button" id="btn-logout" class="btn-secundario">Cerrar sesión</button>
+      </div>
+      <form id="form-auth">
+        <h2>Ingresá para publicar y comentar</h2>
+        <input type="email" id="auth-email" placeholder="Email" autocomplete="email" required>
+        <input type="password" id="auth-password" placeholder="Contraseña (mínimo 6 caracteres)" autocomplete="current-password" minlength="6" required>
+        <div class="acciones">
+          <button type="submit" class="btn-primario">Iniciar sesión</button>
+          <button type="button" id="btn-registro" class="btn-secundario">Crear cuenta</button>
+        </div>
+      </form>
+      <p id="mensaje-auth" class="mensaje" role="status"></p>
+    </section>
+
+    <section class="form-section" id="form-section" hidden>
+      <h2 id="nombre-form">Reseñar un restaurante</h2>
+      <form id="form-restaurante">
+        <!-- Si está vacío: crea (INSERT). Si tiene un id: edita (UPDATE) -->
+        <input type="hidden" id="restaurante-id" value="">
+        <div class="form-group">
+          <label for="nombre">Nombre del restaurante</label>
+          <input type="text" id="nombre" name="nombre" placeholder="Ej: La Parrilla de Juan" required>
+        </div>
+        <div class="form-group">
+          <label for="cocina">Tipo de cocina</label>
+          <select id="cocina" name="cocina" required>
+            <option value="" disabled selected>Elegí un tipo de cocina</option>
+            <option>Parrilla</option><option>Pizzería</option><option>Pastas</option><option>Sushi</option>
+            <option>Hamburguesas</option><option>Cafetería</option><option>Vegetariano</option><option>Otro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="puntuacion">Puntuación (0 a 10)</label>
+          <input type="number" id="puntuacion" name="puntuacion" min="0" max="10" step="0.5" placeholder="8.5" required>
+        </div>
+        <div class="form-group">
+          <label for="resena">Tu reseña: ¿qué tal estuvo?</label>
+          <textarea id="resena" name="resena" rows="4" maxlength="500" placeholder="Contá qué comiste y qué tal fue la atención" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="imagen-file">Foto del restaurante</label>
+          <input type="file" id="imagen-file" name="imagen" accept="image/*" required>
+        </div>
+        <div class="acciones">
+          <button type="submit" id="btn-submit" class="btn-primario">Publicar reseña</button>
+          <button type="button" id="btn-cancelar" class="btn-secundario" hidden>Cancelar edición</button>
+        </div>
+      </form>
+      <p id="mensaje" class="mensaje" role="status"></p>
+    </section>
+
+    <section class="catalog-section">
+      <h2>Reseñas</h2>
+      <div id="grid-restaurantes" class="grid-cards"></div>
+    </section>
+  </main>
+  <script type="module" src="main.js"></script>
+</body>
+</html>

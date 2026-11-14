@@ -1,0 +1,12 @@
+{
+  "short_name": "Buen Provecho",
+  "name": "Buen Provecho - Reseñas de restaurantes",
+  "icons": [
+    { "src": "icono.png", "type": "image/png", "sizes": "512x512" }
+  ],
+  "start_url": "./index.html",
+  "background_color": "#12261F",
+  "theme_color": "#12261F",
+  "display": "standalone",
+  "orientation": "portrait"
+}
